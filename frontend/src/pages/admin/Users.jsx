@@ -13,8 +13,10 @@ const Users = () => {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then((res) => setUsers(res.data.users))
+       
             .catch(console.log)
             .finally(() => setLoading(false));
+             console.log(users)
     }, []);
 
     const roleBadge = (role) => {
@@ -43,7 +45,7 @@ const Users = () => {
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Role</th>
-                                <th>Joined</th>
+                                {/* <th>Joined</th> */}
                             </tr>
                         </thead>
                         <tbody>
@@ -59,9 +61,9 @@ const Users = () => {
                                     </td>
                                     <td className="text-slate-600">{user.email}</td>
                                     <td><span className={roleBadge(user.role)}>{user.role}</span></td>
-                                    <td className="text-slate-500">
+                                    {/* <td className="text-slate-500">
                                         {user.createdAt ? new Date(user.createdAt).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" }) : "N/A"}
-                                    </td>
+                                    </td> */}
                                 </tr>
                             ))}
                         </tbody>

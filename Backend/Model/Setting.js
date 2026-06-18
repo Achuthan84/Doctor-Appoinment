@@ -1,23 +1,25 @@
 import mongoose from "mongoose";
 
 const settingSchema = new mongoose.Schema(
-    {
-        commissionPercentage: {
-            type: Number,
-            default: 10
-        },
-        appName: {
-            type: String,
-            default: "Doctor Appointment"
-        },
-
-        logo: {
-            type: String
-        }
+  {
+    appName: {
+      type: String,
+      default: "Doctor Appointment"
     },
-    {
-        timestamps: true
+
+    commissionPercentage: {
+      type: Number,
+      default: 10
+    },
+
+    logo: {
+      type: String,
+      default: ""
     }
+  },
+  {
+    timestamps: true
+  }
 );
 
-export default mongoose.model("Setting", settingSchema);
+export default mongoose.model("Setting", settingSchema);vv

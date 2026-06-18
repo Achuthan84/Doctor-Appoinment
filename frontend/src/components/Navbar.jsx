@@ -1,6 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import axios from "axios";
 
 const navLinks = {
     guest: [
@@ -28,11 +29,25 @@ const navLinks = {
     ],
 };
 
+
+
 const Navbar = () => {
     const navigate = useNavigate();
     const { user, logout } = useContext(AuthContext);
     const [menuOpen, setMenuOpen] = useState(false);
+    const [appName, setAppName] = useState("")
 
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+
+        axios.get("http://localhost:5000/api/admin/updated-settings", {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then((res) => setAppName(res.data.settings.appName))
+            .catch((error) => console.log(error.response?.data?.message || error.message))
+    }, []);
     const role = user?.role;
     const links = !user ? navLinks.guest : navLinks[role] || [];
 
@@ -56,7 +71,7 @@ const Navbar = () => {
                         </svg>
                     </div>
                     <div className="min-w-0 leading-tight">
-                        <span className="block truncate text-base font-bold text-slate-900 sm:text-lg">DoctorApp</span>
+                        <span className="block truncate text-base font-bold text-slate-900 sm:text-lg">{appName}</span>
                         <span className="hidden text-xs text-slate-500 sm:block">Healthcare made simple</span>
                     </div>
                 </Link>

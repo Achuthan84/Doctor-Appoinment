@@ -12,7 +12,7 @@ export const approveDoctor = async (req, res) => {
                 message: "Doctor not Found"
             })
         }
-        
+
         doctor.approved = true;;
         await doctor.save();
 
@@ -78,8 +78,41 @@ export const getAllAppointments = async (req, res) => {
 }
 
 export const updateSettings = async (req, res) => {
+
     try {
-        const settings = await Setting.findOneAndUpdate({}, req.body, { new: true, upsert: true })
+        const updateData = {
+            appName: req.body.appName,
+            commissionPercentage: req.body.commissionPercentage
+        };
+
+        if (req.file) {
+            updateData.logo = req.file.filename;
+        }
+        const settings = await Setting.findOneAndUpdate(
+            {},
+            updateData,
+            {
+                new: true,
+                upsert: true
+            }
+        );
+        res.status(200).json({
+            success: true,
+            message: "Settings updated successfully",
+            settings
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
+export const getUpdatedSettings = async (req, res) => {
+    try {
+        const settings = await Setting.findOne()
         res.status(200).json({
             success: true,
             settings
