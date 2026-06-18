@@ -7,7 +7,7 @@ export const addPrescription = async (req, res) => {
     try {
         const { appointmentId, medicines, notes } = req.body;
         const doctor = await Doctor.findOne({ userId: req.user._id });
-        const appointment = await Appointment.findById(appointmentId);
+        const appointment = await Appointment.findById(appointmentId)
 
         if (!appointment) {
             return res.status(404).json({
@@ -46,7 +46,7 @@ export const getUserPrescriptions = async (req, res) => {
                 path: "userId",
                 select: "name email"
             }
-        });
+        }).sort({ createdAt: -1 });
         res.status(200).json({
             success: true,
             prescriptions

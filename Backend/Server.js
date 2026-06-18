@@ -10,6 +10,7 @@ import appointmentRoutes from "./Route/appointmentRoute.js";
 import adminRoutes from "./Route/adminRoute.js";
 import prescriptionRoutes from "./Route/prescriptionRoute.js";
 import notificationRoutes from "./Route/notificationRoutes.js";
+import "./cron/notificationCron.js";
 
 dotenv.config();
 ConnectDB();
