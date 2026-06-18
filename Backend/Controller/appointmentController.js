@@ -186,7 +186,7 @@ export const rescheduleAppointment = async (req, res) => {
         const diffInHours =
             (appointmentDateTime - now) / (1000 * 60 * 60);
 
-        if (diffInHours < 24) {
+        if (diffInHours > 24) {
             return res.status(400).json({
                 success: false,
                 message: "You can reschedule only before 24 hours."
