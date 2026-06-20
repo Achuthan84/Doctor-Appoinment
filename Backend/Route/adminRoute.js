@@ -3,6 +3,7 @@ import express from "express";
 import { approveDoctor, getPendingDoctors, getAllUsers, getAllAppointments, updateSettings, getDashboard, getUpdatedSettings } from "../Controller/adminController.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 import roleMiddleware from "../middleware/roleMiddleware.js";
+import upload from "../middleware/uploadMiddleware.js";
 
 const router = express.Router();
 

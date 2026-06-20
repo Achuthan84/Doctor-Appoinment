@@ -22,4 +22,4 @@ const settingSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.model("Setting", settingSchema);vv
+export default mongoose.model("Setting", settingSchema);
